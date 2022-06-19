@@ -62,8 +62,7 @@ class WordleScreen(tk.Frame):
     def info_lost(self):
         self.game_over_dialog_title.set("Następnym razem wygrasz!")
         self.game_over_dialog_message.set(
-            f"Jeszcze raz?\n(BTW słowo to {self._game.answer})"
-        )
+            f"Jeszcze raz?\n(BTW słowo to {self._game.answer})")
         self.game_over_dialog.place(relx=0.5, rely=0.5, anchor="center")
 
     def init_ui(self):
