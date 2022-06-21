@@ -1,3 +1,5 @@
+from hashlib import md5
+
 from sqlalchemy.orm import sessionmaker
 from DB.Player import Player, engine
 
@@ -63,19 +65,19 @@ class DaoWordle(Dao):
         player = session.query(Player).get(login)
         player.win = player.win + 1
         player.game = player.game + 1
-        match number:
-            case 1:
-                player.A1 = player.A1 + 1
-            case 2:
-                player.A2 = player.A2 + 1
-            case 3:
-                player.A3 = player.A3 + 1
-            case 4:
-                player.A4 = player.A4 + 1
-            case 5:
-                player.A5 = player.A5 + 1
-            case 6:
-                player.A6 = player.A6 + 1
+
+        if number == 1:
+            player.A1 = player.A1 + 1
+        if number == 2:
+            player.A2 = player.A2 + 1
+        if number == 3:
+            player.A3 = player.A3 + 1
+        if number == 4:
+            player.A4 = player.A4 + 1
+        if number == 5:
+            player.A5 = player.A5 + 1
+        if number == 6:
+            player.A6 = player.A6 + 1
 
         session.flush()
         session.commit()
@@ -103,4 +105,4 @@ class DaoWordle(Dao):
 
     def checkpass(self, login, password):
         user = self.get(login)
-        return password == user.password
+        return user.password == md5(password.encode()).hexdigest()

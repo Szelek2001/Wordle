@@ -1,4 +1,5 @@
 import tkinter as tk
+from hashlib import md5
 from tkinter import ttk
 import text_file.config
 from DB.DaoWordle import DaoWordle
@@ -102,7 +103,7 @@ class RegisterScreen(tk.Frame):
         if self.password.get() == "":
             self.toast("Niepoprawne haslo", 3)
             return False
-        new_player = Player(self.login.get(), self.password.get())
+        new_player = Player(self.login.get(), md5(self.password.get().encode()).hexdigest())
         dao.add(new_player)
         self.controller.show_frame("LoginScreen")
 
